@@ -1,3 +1,25 @@
-- name: Copy toàn bộ code vào thư mục web Nginx
-  run: |
-    sudo cp -r ./* /var/www/html/
+name: CI/CD Simple Web Deployment
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  continuous-deployment:
+    runs-on: self-hosted
+    steps:
+      - name: Kéo code mới nhất về máy ảo
+        uses: actions/checkout@v4
+
+      - name: Copy toàn bộ file sang thư mục Nginx
+        run: |
+          # Xóa sạch thư mục web cũ để tránh lưu file rác
+          sudo rm -rf /var/www/html/*
+          # Copy toàn bộ nội dung trong repo sang /var/www/html/
+          sudo cp -r * /var/www/html/
+          # Đảm bảo phân quyền đọc cho Nginx
+          sudo chmod -R 755 /var/www/html
+
+      - name: Liệt kê các file đã deploy để xác nhận
+        run: |
+          ls -la /var/www/html
