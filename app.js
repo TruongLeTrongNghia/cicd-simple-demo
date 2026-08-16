@@ -132,6 +132,7 @@ function ClockApp() {
             </div>
         </div>
     );
+}
 
 // Render App
 ReactDOM.createRoot(document.getElementById('root')).render(<ClockApp />);
