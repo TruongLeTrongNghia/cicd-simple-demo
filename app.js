@@ -79,9 +79,6 @@ function Clock({ theme }) {
 
                         {/* Tâm đồng hồ */}
                         <div className="center-dot" />
-                        
-                        {/* Sun/Moon */}
-                        <div className={`celestial-body theme-${theme}`} />
                     </div>
                 </div>
             </div>
