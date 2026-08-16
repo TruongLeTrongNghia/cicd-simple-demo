@@ -42,7 +42,7 @@ function Clock({ theme }) {
                                         key={i}
                                         className="hour-marker flip-card"
                                         style={{
-                                            transform: `rotate(${angle}deg) translateY(-80px)`
+                                            transform: `rotate(${angle}deg) translateY(-130px)`
                                         }}
                                     >
                                         <span style={{ transform: `rotate(-${angle}deg)` }}>
