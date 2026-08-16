@@ -279,6 +279,35 @@ body.theme-sunset {
 }
 
 /* Center Dot */
+/* Clock Text */
+.clock-text {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    z-index: 5;
+    transition: color 0.8s ease, text-shadow 0.8s ease;
+}
+
+.clock-container.theme-dark .clock-text {
+    color: var(--gold);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.clock-container.theme-sky .clock-text {
+    color: var(--sky-accent);
+    text-shadow: 0 2px 6px rgba(74, 144, 226, 0.5);
+}
+
+.clock-container.theme-sunset .clock-text {
+    color: var(--sunset-accent);
+    text-shadow: 0 2px 6px rgba(255, 140, 66, 0.8);
+}
+
 .center-dot {
     position: absolute;
     width: 16px;

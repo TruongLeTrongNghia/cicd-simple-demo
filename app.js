@@ -77,6 +77,9 @@ function Clock({ theme }) {
                             }}
                         />
 
+                        {/* Time Life Text */}
+                        <div className="clock-text">TIME LIFE</div>
+
                         {/* Tâm đồng hồ */}
                         <div className="center-dot" />
                     </div>
