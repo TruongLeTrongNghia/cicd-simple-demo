@@ -1,4 +1,4 @@
-/* Elegant Clock - Dark & Gray Theme with React */
+/* Elegant Clock - Multi Theme with React */
 
 :root {
     --primary-black: #0a0a0a;
@@ -10,6 +10,20 @@
     --gold: #d4af37;
     --accent-gold: #ffd700;
     --text-light: #e8e8e8;
+    
+    /* Sky Theme */
+    --sky-light: #87ceeb;
+    --sky-dark: #4a90e2;
+    --cloud-white: #f0f8ff;
+    --sky-gold: #1e90ff;
+    --sky-accent: #00bfff;
+    
+    /* Sunset Theme */
+    --sunset-orange: #ff6b35;
+    --sunset-red: #e63946;
+    --sunset-purple: #a23b72;
+    --sunset-dark: #1a1a2e;
+    --sunset-accent: #ff8c42;
 }
 
 * {
@@ -24,9 +38,25 @@ html, body {
 
 body {
     font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-    background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 50%, var(--dark-gray) 100%);
     color: var(--text-light);
     line-height: 1.6;
+    transition: background 0.8s ease;
+}
+
+/* Dark Theme */
+body.theme-dark {
+    background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 50%, var(--dark-gray) 100%);
+}
+
+/* Sky Theme */
+body.theme-sky {
+    background: linear-gradient(180deg, #87ceeb 0%, #e0f6ff 30%, #b0e0e6 100%);
+    color: #333;
+}
+
+/* Sunset Theme */
+body.theme-sunset {
+    background: linear-gradient(180deg, #1a1a2e 0%, #ff6b35 25%, #f7931e 50%, #ffb84d 75%, #1a1a2e 100%);
 }
 
 #root {
@@ -42,6 +72,19 @@ body {
     justify-content: center;
     min-height: 100vh;
     padding: 2rem;
+    transition: all 0.8s ease;
+}
+
+.app-container.theme-dark {
+    background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 50%, var(--dark-gray) 100%);
+}
+
+.app-container.theme-sky {
+    background: linear-gradient(180deg, #87ceeb 0%, #e0f6ff 30%, #b0e0e6 100%);
+}
+
+.app-container.theme-sunset {
+    background: linear-gradient(180deg, #1a1a2e 0%, #ff6b35 25%, #f7931e 50%, #ffb84d 75%, #1a1a2e 100%);
 }
 
 /* Clock Container */
@@ -84,14 +127,37 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.8s ease;
+}
+
+/* Dark Theme Clock Face */
+.clock-face.theme-dark {
     background: radial-gradient(circle at 30% 30%, #3a3a3a, var(--primary-black));
     border: 12px solid var(--gold);
     box-shadow: 
         inset 0 0 20px rgba(0, 0, 0, 0.9),
         0 0 40px rgba(212, 175, 55, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+}
+
+/* Sky Theme Clock Face */
+.clock-face.theme-sky {
+    background: radial-gradient(circle at 30% 30%, #e0f6ff, #87ceeb);
+    border: 12px solid var(--sky-accent);
+    box-shadow: 
+        inset 0 0 20px rgba(135, 206, 235, 0.4),
+        0 0 40px rgba(0, 191, 255, 0.3);
+}
+
+/* Sunset Theme Clock Face */
+.clock-face.theme-sunset {
+    background: radial-gradient(circle at 30% 30%, #ff8c42, #e63946);
+    border: 12px solid var(--sunset-accent);
+    box-shadow: 
+        inset 0 0 20px rgba(255, 107, 53, 0.4),
+        0 0 40px rgba(255, 140, 66, 0.3);
 }
 
 /* Hour Markers */
@@ -117,7 +183,21 @@ body {
 .hour-marker span {
     font-size: 18px;
     font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: color 0.8s ease;
+}
+
+.clock-container.theme-dark .hour-marker span {
     color: var(--gold);
+}
+
+.clock-container.theme-sky .hour-marker span {
+    color: var(--sky-accent);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.clock-container.theme-sunset .hour-marker span {
+    color: var(--sunset-accent);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -136,24 +216,66 @@ body {
     width: 6px;
     height: 80px;
     margin-left: -3px;
-    background: linear-gradient(to top, var(--gold), var(--silver));
+    transition: background 0.8s ease, box-shadow 0.8s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.clock-container.theme-dark .hour-hand {
+    background: linear-gradient(to top, var(--gold), var(--silver));
+}
+
+.clock-container.theme-sky .hour-hand {
+    background: linear-gradient(to top, var(--sky-accent), var(--cloud-white));
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.4);
+}
+
+.clock-container.theme-sunset .hour-hand {
+    background: linear-gradient(to top, var(--sunset-accent), var(--sunset-red));
+    box-shadow: 0 4px 8px rgba(255, 107, 53, 0.6);
 }
 
 .minute-hand {
     width: 5px;
     height: 110px;
     margin-left: -2.5px;
-    background: var(--silver);
+    transition: background 0.8s ease, box-shadow 0.8s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.clock-container.theme-dark .minute-hand {
+    background: var(--silver);
+}
+
+.clock-container.theme-sky .minute-hand {
+    background: var(--cloud-white);
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.4);
+}
+
+.clock-container.theme-sunset .minute-hand {
+    background: var(--sunset-red);
+    box-shadow: 0 4px 8px rgba(255, 107, 53, 0.6);
 }
 
 .second-hand {
     width: 2px;
     height: 120px;
     margin-left: -1px;
+    transition: background 0.8s ease, box-shadow 0.8s ease;
+}
+
+.clock-container.theme-dark .second-hand {
     background: var(--accent-gold);
     box-shadow: 0 2px 4px rgba(212, 175, 55, 0.8);
+}
+
+.clock-container.theme-sky .second-hand {
+    background: var(--sky-gold);
+    box-shadow: 0 2px 4px rgba(30, 144, 255, 0.8);
+}
+
+.clock-container.theme-sunset .second-hand {
+    background: #ffd700;
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.8);
 }
 
 /* Center Dot */
@@ -161,15 +283,33 @@ body {
     position: absolute;
     width: 16px;
     height: 16px;
-    background: radial-gradient(circle at 30% 30%, var(--accent-gold), var(--gold));
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 10;
+    transition: background 0.8s ease, box-shadow 0.8s ease;
+}
+
+.clock-container.theme-dark .center-dot {
+    background: radial-gradient(circle at 30% 30%, var(--accent-gold), var(--gold));
     box-shadow: 
         0 4px 8px rgba(0, 0, 0, 0.6),
         inset 0 1px 2px rgba(255, 255, 255, 0.3);
-    z-index: 10;
+}
+
+.clock-container.theme-sky .center-dot {
+    background: radial-gradient(circle at 30% 30%, var(--sky-accent), var(--sky-gold));
+    box-shadow: 
+        0 4px 8px rgba(74, 144, 226, 0.6),
+        inset 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.clock-container.theme-sunset .center-dot {
+    background: radial-gradient(circle at 30% 30%, var(--sunset-accent), #ff6b35);
+    box-shadow: 
+        0 4px 8px rgba(255, 107, 53, 0.6),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 /* Digital Time Display */
@@ -192,21 +332,163 @@ body {
 .time-display {
     font-size: 4rem;
     font-weight: 300;
-    color: var(--accent-gold);
     letter-spacing: 0.1em;
     font-family: 'Courier New', monospace;
+    margin-bottom: 1rem;
+    transition: color 0.8s ease, text-shadow 0.8s ease;
+}
+
+.clock-container.theme-dark .time-display {
+    color: var(--accent-gold);
     text-shadow: 
         0 0 10px rgba(212, 175, 55, 0.5),
         0 0 20px rgba(212, 175, 55, 0.3);
-    margin-bottom: 1rem;
+}
+
+.clock-container.theme-sky .time-display {
+    color: var(--sky-gold);
+    text-shadow: 
+        0 0 10px rgba(30, 144, 255, 0.5),
+        0 0 20px rgba(30, 144, 255, 0.3);
+}
+
+.clock-container.theme-sunset .time-display {
+    color: var(--sunset-accent);
+    text-shadow: 
+        0 0 10px rgba(255, 140, 66, 0.5),
+        0 0 20px rgba(255, 140, 66, 0.3);
 }
 
 .date-display {
     font-size: 1.2rem;
-    color: var(--silver);
     letter-spacing: 0.05em;
     text-transform: capitalize;
+    transition: color 0.8s ease, text-shadow 0.8s ease;
+}
+
+.clock-container.theme-dark .date-display {
+    color: var(--silver);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.clock-container.theme-sky .date-display {
+    color: #1e90ff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.clock-container.theme-sunset .date-display {
+    color: #ffb84d;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Theme Selector */
+.theme-selector {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    animation: slideUp 0.8s ease-out 0.4s both;
+}
+
+.theme-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.theme-dark .theme-btn {
+    background: rgba(212, 175, 55, 0.3);
+    color: var(--accent-gold);
+    border: 2px solid var(--gold);
+}
+
+.theme-dark .theme-btn:hover {
+    background: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    transform: translateY(-3px);
+}
+
+.theme-sky .theme-btn {
+    background: rgba(30, 144, 255, 0.3);
+    color: var(--sky-gold);
+    border: 2px solid var(--sky-accent);
+}
+
+.theme-sky .theme-btn:hover {
+    background: rgba(30, 144, 255, 0.5);
+    box-shadow: 0 0 20px rgba(30, 144, 255, 0.4);
+    transform: translateY(-3px);
+}
+
+.theme-sunset .theme-btn {
+    background: rgba(255, 140, 66, 0.3);
+    color: var(--sunset-accent);
+    border: 2px solid var(--sunset-accent);
+}
+
+.theme-sunset .theme-btn:hover {
+    background: rgba(255, 140, 66, 0.5);
+    box-shadow: 0 0 20px rgba(255, 140, 66, 0.4);
+    transform: translateY(-3px);
+}
+
+.theme-indicators {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.theme-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-indicator.active {
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transform: scale(1.3);
+}
+
+.theme-dark .theme-indicator {
+    background: rgba(212, 175, 55, 0.2);
+}
+
+.theme-dark .theme-indicator.active {
+    background: var(--gold);
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+}
+
+.theme-sky .theme-indicator {
+    background: rgba(30, 144, 255, 0.2);
+}
+
+.theme-sky .theme-indicator.active {
+    background: var(--sky-gold);
+    border-color: var(--sky-accent);
+    box-shadow: 0 0 15px rgba(30, 144, 255, 0.6);
+}
+
+.theme-sunset .theme-indicator {
+    background: rgba(255, 140, 66, 0.2);
+}
+
+.theme-sunset .theme-indicator.active {
+    background: var(--sunset-accent);
+    border-color: #ffd700;
+    box-shadow: 0 0 15px rgba(255, 140, 66, 0.6);
 }
 
 /* Responsive Design */
@@ -254,5 +536,13 @@ body {
     .clock-container {
         gap: 2rem;
     }
+
+    .theme-selector {
+        margin-top: 2rem;
+    }
+
+    .theme-btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
 }
 

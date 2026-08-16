@@ -1,7 +1,7 @@
 const { useState, useEffect } = React;
 
 // Clock Component - Hiển thị đồng hồ chạy thời gian thực
-function Clock() {
+function Clock({ theme }) {
     const [time, setTime] = useState(new Date());
 
     useEffect(() => {
@@ -28,11 +28,11 @@ function Clock() {
     const dateString = time.toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
     return (
-        <div className="clock-container">
+        <div className={`clock-container theme-${theme}`}>
             <div className="clock-wrapper">
                 {/* Clock Face Analog */}
-                <div className="clock">
-                    <div className="clock-face">
+                <div className={`clock theme-${theme}`}>
+                    <div className={`clock-face theme-${theme}`}>
                         {/* Giờ */}
                         <div className="hour-markers">
                             {[...Array(12)].map((_, i) => {
@@ -94,12 +94,41 @@ function Clock() {
 
 // Main App
 function ClockApp() {
+    const [theme, setTheme] = useState('dark'); // 'dark', 'sky', 'sunset'
+
+    const themes = [
+        { id: 'dark', name: '🌙 Đêm' },
+        { id: 'sky', name: '🌅 Trời Xanh' },
+        { id: 'sunset', name: '🌅 Chiều Tà' }
+    ];
+
+    const nextTheme = () => {
+        const currentIndex = themes.findIndex(t => t.id === theme);
+        const nextIndex = (currentIndex + 1) % themes.length;
+        setTheme(themes[nextIndex].id);
+    };
+
     return (
-        <div className="app-container">
-            <Clock />
+        <div className={`app-container theme-${theme}`}>
+            <Clock theme={theme} />
+            
+            {/* Theme Selector */}
+            <div className="theme-selector">
+                <button className="theme-btn" onClick={nextTheme}>
+                    Chuyển nền
+                </button>
+                <div className="theme-indicators">
+                    {themes.map(t => (
+                        <div
+                            key={t.id}
+                            className={`theme-indicator ${theme === t.id ? 'active' : ''}`}
+                            title={t.name}
+                        />
+                    ))}
+                </div>
+            </div>
         </div>
     );
-}
 
 // Render App
 ReactDOM.createRoot(document.getElementById('root')).render(<ClockApp />);
