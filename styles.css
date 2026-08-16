@@ -136,7 +136,6 @@ body.theme-sunset {
 /* Dark Theme Clock Face */
 .clock-face.theme-dark {
     background: radial-gradient(circle at 30% 30%, #3a3a3a, var(--primary-black));
-    border: 12px solid var(--gold);
     box-shadow: 
         inset 0 0 20px rgba(0, 0, 0, 0.9),
         0 0 40px rgba(212, 175, 55, 0.3);
@@ -145,7 +144,6 @@ body.theme-sunset {
 /* Sky Theme Clock Face */
 .clock-face.theme-sky {
     background: radial-gradient(circle at 30% 30%, #e0f6ff, #87ceeb);
-    border: 12px solid var(--sky-accent);
     box-shadow: 
         inset 0 0 20px rgba(135, 206, 235, 0.4),
         0 0 40px rgba(0, 191, 255, 0.3);
@@ -154,7 +152,6 @@ body.theme-sunset {
 /* Sunset Theme Clock Face */
 .clock-face.theme-sunset {
     background: radial-gradient(circle at 30% 30%, #ff8c42, #e63946);
-    border: 12px solid var(--sunset-accent);
     box-shadow: 
         inset 0 0 20px rgba(255, 107, 53, 0.4),
         0 0 40px rgba(255, 140, 66, 0.3);
