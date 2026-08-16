@@ -40,7 +40,7 @@ function Clock({ theme }) {
                                 return (
                                     <div
                                         key={i}
-                                        className="hour-marker"
+                                        className="hour-marker flip-card"
                                         style={{
                                             transform: `rotate(${angle}deg) translateY(-80px)`
                                         }}
@@ -77,11 +77,11 @@ function Clock({ theme }) {
                             }}
                         />
 
-                        {/* Time Life Text */}
-                        <div className="clock-text">TIME LIFE</div>
-
                         {/* Tâm đồng hồ */}
                         <div className="center-dot" />
+                        
+                        {/* Sun/Moon */}
+                        <div className={`celestial-body theme-${theme}`} />
                     </div>
                 </div>
             </div>
@@ -118,7 +118,7 @@ function ClockApp() {
             {/* Theme Selector */}
             <div className="theme-selector">
                 <button className="theme-btn" onClick={nextTheme}>
-                    Chuyển nền
+                    →
                 </button>
                 <div className="theme-indicators">
                     {themes.map(t => (
